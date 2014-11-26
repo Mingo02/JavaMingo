@@ -1,0 +1,35 @@
+package exepcion.personalizada;
+import java.util.Scanner;
+public class ExepcionPersonalizada {
+  static String numero;
+  static Scanner key;
+  static boolean sw;
+  static void Rango (String n ) throws Exepcion {
+      for(int i=0;i<n.length();i++)
+          if((n.charAt(i))!='0'&&(n.charAt(i))!='1'&&(n.charAt(i))!='2'&&(n.charAt(i))!='3'&&(n.charAt(i))!='4'&&(n.charAt(i))!='5'&&(n.charAt(i))!='6'&&(n.charAt(i))!='7') {
+      throw new Exepcion("los digitos no son octal");}}
+    public static void main(String[] args) {
+        key=new Scanner(System.in);
+        do{
+            try{
+                sw=true;
+                System.out.println("numero octal");
+                numero=key.next();
+                Rango(numero); }
+                catch(Exepcion e){
+                    String mensaje=e.getMessage();
+                     System.out.println("error de mensaje "+mensaje);
+                     sw=false;
+                }
+          
+        }while(sw==false);
+           System.out.println("numero: "+ numero); 
+  }
+  }
+    package exepcion.personalizada;
+public class Exepcion extends Exception {
+    public Exepcion(String msg){
+        super(msg);
+    } 
+    
+}
