@@ -1,0 +1,112 @@
+package proyecto3;
+import java.util.Scanner;
+public class Proyecto3 {
+    static boolean sw1;
+    static String str1 = null,str2 = null;
+ static void Rango(String numero)throws ExcepcionIntervalo{
+      
+     for (int k=0;k<numero.length();k++){
+        if(numero.charAt(k)!='0' && numero.charAt(k)!='1'){
+        throw new ExcepcionIntervalo("Números no binarios o contiene caractéres alfabéticos");
+        }
+    }
+}
+    public static void main(String[] args) {
+    Scanner teclado=new Scanner(System.in);
+    do {
+    sw1=true;
+    System.out.println("Escriba un numero binario ");
+    try {
+        str1=teclado.next();
+        Rango(str1);
+    }
+    catch(ExcepcionIntervalo ex) {
+        String respuesta=ex.getMessage();
+        System.out.println("El error es "+respuesta);
+        sw1=false;
+    }
+    } while(sw1==false);
+    sw1=true;
+    do{
+    sw1=true;
+    System.out.println("Escriba otro numero binario ");
+    try {
+        str2=teclado.next();
+        Rango(str2);
+    }
+    catch(ExcepcionIntervalo ex) {
+        String respuesta=ex.getMessage();
+        System.out.println("El error es "+respuesta);
+        sw1=false;
+    }
+    }while(sw1==false);
+    Sutractor resta=new Sutractor();
+    int c=str1.length()-str2.length();
+    for(int b=0;b<c;b++)
+    str2='0'+str2;
+    System.out.println("El resultado de la Resta es " + resta.Sumar(str1,resta.complementoaldos(resta.complementoaluno(str2,str1.length()))));
+    }
+}
+package proyecto3;
+public class Sutractor {
+        public int aNumero(char digito){
+    int dig = 0;
+    switch(digito) {
+        case '0': dig=0;
+        break;
+        case '1': dig=1;
+        break;
+    }
+    return dig;
+}
+        public char aLetra(int digito){
+    char dig=' ';
+    switch(digito) {
+        case 0: dig='0';
+        break;
+        case 1: dig='1';
+        break;
+    }
+    return dig;
+    }
+        public String Sumar(String num1, String num2){
+    int c=0,cantidad=0,i,j;//acarreo
+    String resultado=""; //solucion de la suma
+    //para igualar el tamaño de las cantidades colcocamos 0 a la derecha
+    cantidad=num1.length()-num2.length();
+    for(i=0;i<cantidad;i++)
+        num2='0'+num2;
+    char let=' ';
+    int sol,tamano;
+    tamano=num1.length();
+    for (j=tamano-1;j>=0;j--){
+        sol=aNumero(num1.charAt(j))+aNumero(num2.charAt(j))+c;
+        if(sol>=2){
+            c=1;
+            sol=sol-2;
+        }
+        else
+            c=0;
+    let=aLetra(sol);
+    resultado=let+resultado;
+    }
+    String solu=resultado;
+    return solu;
+    }
+    public String complementoaluno(String n,int tamano) {
+    String salida="";
+    for (int h=0;h<tamano;h++) {
+        if (n.charAt(h)=='0')
+            salida=salida +'1';
+        if (n.charAt(h)=='1')
+            salida=salida +'0';
+    }
+    return salida;
+    }
+    public String complementoaldos(String n) {
+    return Sumar(n,"1");
+    }
+    public String restar(String n1, String n2) {
+    return Sumar(n1,complementoaldos(complementoaluno(n2,n1.length())));
+    }
+}
