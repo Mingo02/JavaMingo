@@ -1,0 +1,91 @@
+package practicaprojetcs;
+import java.util.Scanner;
+public class Practicaprojetcs {
+
+ static void Rango(String numero)throws ExcepcionIntervalo{
+    for (int k=0;k<numero.length();k++){
+
+        if(numero.charAt(k)!='0' && numero.charAt(k)!='1'){
+
+        throw new ExcepcionIntervalo("Números no binarios o contiene caractéres alfabéticos");
+
+        }
+
+    }
+
+}
+    public static void main(String[] args) {
+      boolean sw1;
+    String str1 = null,str2 = null;
+
+    Scanner teclado=new Scanner(System.in);
+
+    do {
+
+    sw1=true;
+
+    System.out.println("Escriba un numero binario ");
+
+    try {
+
+        str1=teclado.next();
+
+        rango(str1);
+
+    }
+
+    catch(ExcepcionIntervalo ex) {
+
+        String respuesta=ex.getMessage();
+
+        System.out.println("El error es "+respuesta);
+
+        sw1=false;
+
+    }
+
+    } while(sw1==false);
+
+    sw1=true;
+
+    do{
+
+    sw1=true;
+
+    System.out.println("Escriba otro numero binario ");
+
+    try {
+
+        str2=teclado.next();
+
+        rango(str2);
+
+    }
+
+    catch(ExcepcionIntervalo ex) {
+
+        String respuesta=ex.getMessage();
+
+        System.out.println("El error es "+respuesta);
+
+        sw1=false;
+
+    }
+
+    }while(sw1==false);
+
+    Resta s=new Resta();
+
+    int c=str1.length()-str2.length();
+
+    for(int b=0;b<c;b++)
+
+    str2='0'+str2;
+
+    System.out.println("El resultado de la Resta es " + s.Sumar(str1,s.complementoaldos(s.complementoaluno(str2,str1.length()))));}
+
+       
+
+}
+
+    
